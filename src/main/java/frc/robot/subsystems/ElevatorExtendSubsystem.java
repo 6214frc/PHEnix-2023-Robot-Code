@@ -19,7 +19,20 @@ public class ElevatorExtendSubsystem extends SubsystemBase {
 
   /** Create a new claw subsystem. */
   public ElevatorExtendSubsystem() {
+    // Factory reset, so we get the SPARKS MAX to a known state before configuring
+    // them. This is useful in case a SPARK MAX is swapped out.
+    m_leftMotor.restoreFactoryDefaults();
+    m_rightMotor.restoreFactoryDefaults();
 
+    // Invert the turning encoder, since the output shaft rotates in the opposite direction of
+    // the steering motor in the MAXSwerve Module.
+    m_leftMotor.setInverted(ElevatorExtendConstants.kElevatorExtendLeftEncoderInverted);
+    m_rightMotor.setInverted(ElevatorExtendConstants.kElevatorExtendRightEncoderInverted);
+  
+    // Save the SPARK MAX configurations. If a SPARK MAX browns out during
+    // operation, it will maintain the above configurations.
+    m_leftMotor.burnFlash();
+    m_rightMotor.burnFlash();
   }
 
   /** Set the claw motor to move in the open direction. */
@@ -43,6 +56,5 @@ public class ElevatorExtendSubsystem extends SubsystemBase {
   /** Call log method every loop. */
   @Override
   public void periodic() {
-
   }
 }

@@ -69,11 +69,15 @@ public final class Constants {
     // SPARK MAX CAN IDs
     public static final int kLeftRotateCanId = 18;
     public static final int kRightRotateCanId = 19;
+    public static final boolean kElevatorRotateLeftEncoderInverted = false;
+    public static final boolean kElevatorRotateRightEncoderInverted = true;
   }
 
   public static final class ElevatorExtendConstants {
     public static final int kLeftExtendCanId = 20;
     public static final int kRightExtendCanId = 21;
+    public static final boolean kElevatorExtendLeftEncoderInverted = false;
+    public static final boolean kElevatorExtendRightEncoderInverted = true;    
   }
 
   public static final class GrabberConstants {
