@@ -8,7 +8,7 @@ import frc.robot.subsystems.GrabberSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
- * A simple command that grabs a hatch with the {@link GrabberSubsystem}. Written explicitly for
+ * A simple command that grabs the game piece with the {@link GrabberSubsystem}. Written explicitly for
  * pedagogical purposes. Actual code should inline a command this simple with {@link
  * edu.wpi.first.wpilibj2.command.InstantCommand}.
  */

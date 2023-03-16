@@ -7,7 +7,7 @@ package frc.robot.commands;
 import frc.robot.subsystems.GrabberSubsystem;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
-/** A command that releases the hatch. */
+/** A command that opens the grabber. */
 public class GrabberOpen extends InstantCommand {
   public GrabberOpen(GrabberSubsystem subsystem) {
     super(subsystem::releaseGamePiece, subsystem);

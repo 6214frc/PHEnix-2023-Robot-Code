@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import frc.robot.Constants.GrabberConstants;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-/** A hatch mechanism actuated by a single {@link DoubleSolenoid}. */
+/** A grabber mechanism actuated by a single {@link DoubleSolenoid}. */
 public class GrabberSubsystem extends SubsystemBase {
   private final DoubleSolenoid m_GrabberSolenoid =
       new DoubleSolenoid(
@@ -21,12 +21,12 @@ public class GrabberSubsystem extends SubsystemBase {
           GrabberConstants.kGrabberSolenoidPorts[0],
           GrabberConstants.kGrabberSolenoidPorts[1]);
 
-  /** Grabs the hatch. */
+  /** Grabs the game piece. */
   public void grabGamePiece() {
     m_GrabberSolenoid.set(kForward);
   }
 
-  /** Releases the hatch. */
+  /** Releases the game piece. */
   public void releaseGamePiece() {
     m_GrabberSolenoid.set(kReverse);
   }

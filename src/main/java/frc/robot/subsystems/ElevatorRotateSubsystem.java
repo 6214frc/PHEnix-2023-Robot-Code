@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 /**
  * The elevator rotate subsystem is a simple system with two 
- * motors for rotatingthe elevator forward and backward.
+ * motors for rotating the elevator forward and backward.
  */
 public class ElevatorRotateSubsystem extends SubsystemBase {
   private final CANSparkMax m_leftMotor = new CANSparkMax(ElevatorRotateConstants.kLeftRotateCanId, MotorType.kBrushless);
@@ -35,25 +35,24 @@ public class ElevatorRotateSubsystem extends SubsystemBase {
     m_rightMotor.burnFlash();
   }
 
-  /** Set the claw motor to move in the open direction. */
+  /** Set the elevator rotate motor to move in the backward direction. */
   public void rotateBackward() {
     m_leftMotor.set(-1);
     m_rightMotor.set(-1);
   }
 
-  /** Set the claw motor to move in the close direction. */
+  /** Set the elevator rotate motor to move in the forward direction. */
   public void rotateForward() {
     m_leftMotor.set(1);
     m_rightMotor.set(1);
   }
 
-  /** Stops the claw motor from moving. */
+  /** Stops the elevator rotate motor from moving. */
   public void stop() {
     m_leftMotor.set(0);
     m_rightMotor.set(0);
   }
 
-  /** Call log method every loop. */
   @Override
   public void periodic() {
   }

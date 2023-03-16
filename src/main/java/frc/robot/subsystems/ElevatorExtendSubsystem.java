@@ -35,25 +35,24 @@ public class ElevatorExtendSubsystem extends SubsystemBase {
     m_rightMotor.burnFlash();
   }
 
-  /** Set the claw motor to move in the open direction. */
+  /** Set the elevator extend motor to retract. */
   public void retract() {
     m_leftMotor.set(-1);
     m_rightMotor.set(-1);
   }
 
-  /** Set the claw motor to move in the close direction. */
+  /** Set the elevator extend motor to extend. */
   public void extend() {
     m_leftMotor.set(1);
     m_rightMotor.set(1);
   }
 
-  /** Stops the claw motor from moving. */
+  /** Stops the elevator extend motor from moving. */
   public void stop() {
     m_leftMotor.set(0);
     m_rightMotor.set(0);
   }
 
-  /** Call log method every loop. */
   @Override
   public void periodic() {
   }
