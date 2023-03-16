@@ -14,13 +14,21 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.PS4Controller.Button;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.ElevatorRotateSubsystem;
+import frc.robot.subsystems.ElevatorExtendSubsystem;
+import frc.robot.subsystems.GrabberSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import frc.robot.commands.ElevatorRotateForward;
+import frc.robot.commands.ElevatorRotateBackward;
+import frc.robot.commands.ElevatorExtend;
+import frc.robot.commands.ElevatorRetract;
+import frc.robot.commands.GrabberOpen;
+import frc.robot.commands.GrabberClose;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import java.util.List;
@@ -34,6 +42,9 @@ import java.util.List;
 public class RobotContainer {
   // The robot's subsystems
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
+  private final ElevatorRotateSubsystem m_elevatorRotateSubsystem = new ElevatorRotateSubsystem();
+  private final ElevatorExtendSubsystem m_elevatorExtendSubsystem = new ElevatorExtendSubsystem();
+  private final GrabberSubsystem m_grabberSubsystem = new GrabberSubsystem();
 
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
@@ -68,10 +79,26 @@ public class RobotContainer {
    * {@link JoystickButton}.
    */
   private void configureButtonBindings() {
-    new JoystickButton(m_driverController, Button.kR1.value)
-        .whileTrue(new RunCommand(
-            () -> m_robotDrive.setX(),
-            m_robotDrive));
+//    new JoystickButton(m_driverController, Button.kR1.value)
+//        .whileTrue(new RunCommand(() -> m_robotDrive.setX(), m_robotDrive));
+
+    // Elevator rotate button assignments
+    new JoystickButton(m_driverController, XboxController.Button.kY.value)
+        .onTrue(new ElevatorRotateForward(m_elevatorRotateSubsystem));
+    new JoystickButton(m_driverController, XboxController.Button.kA.value)
+        .onTrue(new ElevatorRotateBackward(m_elevatorRotateSubsystem));
+
+    // Elevator extend button assignments
+    new JoystickButton(m_driverController, XboxController.Button.kX.value)
+        .onTrue(new ElevatorExtend(m_elevatorExtendSubsystem));
+    new JoystickButton(m_driverController, XboxController.Button.kB.value)
+        .onTrue(new ElevatorRetract(m_elevatorExtendSubsystem));
+
+    // Grabber button assignments
+    new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value)
+        .onTrue(new GrabberOpen(m_grabberSubsystem));
+    new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value)
+        .onTrue(new GrabberClose(m_grabberSubsystem));
   }
 
   /**
