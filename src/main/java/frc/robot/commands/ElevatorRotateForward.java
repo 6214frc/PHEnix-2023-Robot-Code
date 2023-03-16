@@ -4,11 +4,9 @@
 
 package frc.robot.commands;
 
-import frc.robot.Robot;
 import frc.robot.subsystems.ElevatorRotateSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-/** Closes the claw until the limit switch is tripped. */
 public class ElevatorRotateForward extends CommandBase {
   private final ElevatorRotateSubsystem m_elevatorRotateSubsystem;
 
@@ -32,12 +30,6 @@ public class ElevatorRotateForward extends CommandBase {
   // Called once after isFinished returns true
   @Override
   public void end(boolean interrupted) {
-    // NOTE: Doesn't stop in simulation due to lower friction causing the
-    // can to fall out
-    // + there is no need to worry about stalling the motor or crushing the
-    // can.
-    if (!Robot.isSimulation()) {
       m_elevatorRotateSubsystem.stop();
-    }
   }
 }

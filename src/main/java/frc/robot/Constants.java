@@ -65,12 +65,15 @@ public final class Constants {
     public static final boolean kGyroReversed = false;
   }
 
-  public static final class ElevatorExtendConstants {
-    // Place CAN IDs in here.
+  public static final class ElevatorRotateConstants {
+    // SPARK MAX CAN IDs
+    public static final int kLeftRotateCanId = 18;
+    public static final int kRightRotateCanId = 19;
   }
 
-  public static final class ElevatorRotateConstants {
-    // Place CAN IDs in here.
+  public static final class ElevatorExtendConstants {
+    public static final int kLeftExtendCanId = 20;
+    public static final int kRightExtendCanId = 21;
   }
 
   public static final class GrabberConstants {

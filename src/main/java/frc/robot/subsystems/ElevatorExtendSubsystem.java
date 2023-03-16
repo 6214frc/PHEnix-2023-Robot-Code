@@ -4,10 +4,9 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.DigitalInput;
-// import frc.robot.Constants.ElevatorExtendConstants;
-import edu.wpi.first.wpilibj.motorcontrol.Victor;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Constants.ElevatorExtendConstants;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 /**
@@ -15,43 +14,35 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
  * motors, you should probably use a sensor so that the motors don't stall.
  */
 public class ElevatorExtendSubsystem extends SubsystemBase {
-  private final Victor m_motor = new Victor(7);
-  private final DigitalInput m_contact = new DigitalInput(5);
+  private final CANSparkMax m_leftMotor = new CANSparkMax(ElevatorExtendConstants.kLeftExtendCanId, MotorType.kBrushless);
+  private final CANSparkMax m_rightMotor = new CANSparkMax(ElevatorExtendConstants.kRightExtendCanId, MotorType.kBrushless);
 
   /** Create a new claw subsystem. */
   public ElevatorExtendSubsystem() {
-    // Let's name everything on the LiveWindow
-    addChild("Motor", m_motor);
-    addChild("Limit Switch", m_contact);
-  }
 
-  public void log() {
-    SmartDashboard.putData("Claw switch", m_contact);
   }
 
   /** Set the claw motor to move in the open direction. */
   public void retract() {
-    m_motor.set(-1);
+    m_leftMotor.set(-1);
+    m_rightMotor.set(-1);
   }
 
   /** Set the claw motor to move in the close direction. */
   public void extend() {
-    m_motor.set(1);
+    m_leftMotor.set(1);
+    m_rightMotor.set(1);
   }
 
   /** Stops the claw motor from moving. */
   public void stop() {
-    m_motor.set(0);
-  }
-
-  /** Return true when the robot is grabbing an object hard enough to trigger the limit switch. */
-  public boolean isGrabbing() {
-    return m_contact.get();
+    m_leftMotor.set(0);
+    m_rightMotor.set(0);
   }
 
   /** Call log method every loop. */
   @Override
   public void periodic() {
-    log();
+
   }
 }

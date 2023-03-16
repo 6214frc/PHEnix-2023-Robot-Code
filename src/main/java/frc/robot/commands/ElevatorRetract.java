@@ -7,15 +7,9 @@ package frc.robot.commands;
 import frc.robot.subsystems.ElevatorExtendSubsystem;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
-/** Opens the claw for one second. Real robots should use sensors, stalling motors is BAD! */
 public class ElevatorRetract extends WaitCommand {
   private final ElevatorExtendSubsystem m_elevatorExtendSubsystem;
 
-  /**
-   * Creates a new OpenClaw command.
-   *
-   * @param claw The claw to use
-   */
   public ElevatorRetract(ElevatorExtendSubsystem elevatorExtendSubsystem) {
     super(1);
     m_elevatorExtendSubsystem = elevatorExtendSubsystem;
@@ -27,6 +21,12 @@ public class ElevatorRetract extends WaitCommand {
   public void initialize() {
     m_elevatorExtendSubsystem.retract();
     super.initialize();
+  }
+
+  // Make this return true when this Command no longer needs to run execute()
+  @Override
+  public boolean isFinished() {
+    return true;
   }
 
   // Called once after isFinished returns true
