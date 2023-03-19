@@ -5,7 +5,6 @@
 package frc.robot;
 
 import com.revrobotics.CANSparkMax.IdleMode;
-
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
@@ -66,18 +65,23 @@ public final class Constants {
   }
 
   public static final class ElevatorRotateConstants {
-    // SPARK MAX CAN IDs
     public static final int kLeftRotateCanId = 18;
     public static final int kRightRotateCanId = 19;
-    public static final boolean kElevatorRotateLeftEncoderInverted = false;
-    public static final boolean kElevatorRotateRightEncoderInverted = true;
+    public static final double kLeftRotateMotorSpeed = 0.3;
+    public static final double kRightRotateMotorSpeed = 0.3;
+    public static final boolean kElevatorRotateLeftMotorInverted = false;
+    public static final boolean kElevatorRotateRightMotorInverted = true;
   }
 
   public static final class ElevatorExtendConstants {
     public static final int kLeftExtendCanId = 20;
     public static final int kRightExtendCanId = 21;
-    public static final boolean kElevatorExtendLeftEncoderInverted = false;
-    public static final boolean kElevatorExtendRightEncoderInverted = true;    
+    public static final double kLeftElevatorExtendMotorSpeed = 0.3;
+    public static final double kRightElevatorExtendMotorSpeed = 0.3;
+    public static final double kLeftElevatorRetractMotorSpeed = 0.3;
+    public static final double kRightElevatorRetractMotorSpeed = 0.3;
+    public static final boolean kElevatorExtendLeftMotorInverted = false;
+    public static final boolean kElevatorExtendRightMotorInverted = true;    
   }
 
   public static final class GrabberConstants {
@@ -115,6 +119,7 @@ public final class Constants {
     public static final double kTurningEncoderPositionPIDMinInput = 0; // radians
     public static final double kTurningEncoderPositionPIDMaxInput = kTurningEncoderPositionFactor; // radians
 
+    // public static final double kDrivingP = 0.04;
     public static final double kDrivingP = 0.04;
     public static final double kDrivingI = 0;
     public static final double kDrivingD = 0;

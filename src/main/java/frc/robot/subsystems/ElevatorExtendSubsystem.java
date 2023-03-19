@@ -17,17 +17,16 @@ public class ElevatorExtendSubsystem extends SubsystemBase {
   private final CANSparkMax m_leftMotor = new CANSparkMax(ElevatorExtendConstants.kLeftExtendCanId, MotorType.kBrushless);
   private final CANSparkMax m_rightMotor = new CANSparkMax(ElevatorExtendConstants.kRightExtendCanId, MotorType.kBrushless);
 
-  /** Create a new claw subsystem. */
+  /** Create a new elevator subsystem. */
   public ElevatorExtendSubsystem() {
     // Factory reset, so we get the SPARKS MAX to a known state before configuring
     // them. This is useful in case a SPARK MAX is swapped out.
     m_leftMotor.restoreFactoryDefaults();
     m_rightMotor.restoreFactoryDefaults();
 
-    // Invert the turning encoder, since the output shaft rotates in the opposite direction of
-    // the steering motor in the MAXSwerve Module.
-    m_leftMotor.setInverted(ElevatorExtendConstants.kElevatorExtendLeftEncoderInverted);
-    m_rightMotor.setInverted(ElevatorExtendConstants.kElevatorExtendRightEncoderInverted);
+    // Set whether the elevator motor is inverted.
+    m_leftMotor.setInverted(ElevatorExtendConstants.kElevatorExtendLeftMotorInverted);
+    m_rightMotor.setInverted(ElevatorExtendConstants.kElevatorExtendRightMotorInverted);
   
     // Save the SPARK MAX configurations. If a SPARK MAX browns out during
     // operation, it will maintain the above configurations.
@@ -35,16 +34,16 @@ public class ElevatorExtendSubsystem extends SubsystemBase {
     m_rightMotor.burnFlash();
   }
 
-  /** Set the elevator extend motor to retract. */
+  /** Retract the elevator. */
   public void retract() {
-    m_leftMotor.set(-1);
-    m_rightMotor.set(-1);
+    m_leftMotor.set(-ElevatorExtendConstants.kLeftElevatorRetractMotorSpeed);
+    m_rightMotor.set(-ElevatorExtendConstants.kRightElevatorRetractMotorSpeed);
   }
 
-  /** Set the elevator extend motor to extend. */
+  /** Extend the elevator. */
   public void extend() {
-    m_leftMotor.set(1);
-    m_rightMotor.set(1);
+    m_leftMotor.set(ElevatorExtendConstants.kLeftElevatorExtendMotorSpeed);
+    m_rightMotor.set(ElevatorExtendConstants.kRightElevatorExtendMotorSpeed);
   }
 
   /** Stops the elevator extend motor from moving. */

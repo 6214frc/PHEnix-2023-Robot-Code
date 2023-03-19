@@ -23,12 +23,7 @@ import frc.robot.subsystems.ElevatorExtendSubsystem;
 import frc.robot.subsystems.GrabberSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
-import frc.robot.commands.ElevatorRotateForward;
-import frc.robot.commands.ElevatorRotateBackward;
-import frc.robot.commands.ElevatorExtend;
-import frc.robot.commands.ElevatorRetract;
-import frc.robot.commands.GrabberOpen;
-import frc.robot.commands.GrabberClose;
+import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import java.util.List;
@@ -84,21 +79,30 @@ public class RobotContainer {
 
     // Elevator rotate button assignments
     new JoystickButton(m_driverController, XboxController.Button.kY.value)
-        .onTrue(new ElevatorRotateForward(m_elevatorRotateSubsystem));
+        .whileTrue(new StartEndCommand(() -> m_elevatorRotateSubsystem.rotateForward(),
+        () -> m_elevatorRotateSubsystem.stop(), m_elevatorRotateSubsystem));
+
     new JoystickButton(m_driverController, XboxController.Button.kA.value)
-        .onTrue(new ElevatorRotateBackward(m_elevatorRotateSubsystem));
+        .whileTrue(new StartEndCommand(() -> m_elevatorRotateSubsystem.rotateBackward(),
+        () -> m_elevatorRotateSubsystem.stop(), m_elevatorRotateSubsystem));
 
     // Elevator extend button assignments
     new JoystickButton(m_driverController, XboxController.Button.kX.value)
-        .onTrue(new ElevatorExtend(m_elevatorExtendSubsystem));
+        .whileTrue(new StartEndCommand(() -> m_elevatorExtendSubsystem.extend(),
+        () -> m_elevatorExtendSubsystem.stop(), m_elevatorExtendSubsystem));
+
     new JoystickButton(m_driverController, XboxController.Button.kB.value)
-        .onTrue(new ElevatorRetract(m_elevatorExtendSubsystem));
+        .whileTrue(new StartEndCommand(() -> m_elevatorExtendSubsystem.retract(),
+        () -> m_elevatorExtendSubsystem.stop(), m_elevatorExtendSubsystem));
 
     // Grabber button assignments
     new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value)
-        .onTrue(new GrabberOpen(m_grabberSubsystem));
+        .whileTrue(new StartEndCommand(() -> m_grabberSubsystem.grabGamePiece(),
+        () -> m_grabberSubsystem.stop(), m_grabberSubsystem));
+
     new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value)
-        .onTrue(new GrabberClose(m_grabberSubsystem));
+        .whileTrue(new StartEndCommand(() -> m_grabberSubsystem.releaseGamePiece(),
+        () -> m_grabberSubsystem.stop(), m_grabberSubsystem));
   }
 
   /**

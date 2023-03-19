@@ -26,8 +26,8 @@ public class ElevatorRotateSubsystem extends SubsystemBase {
 
     // Invert the turning encoder, since the output shaft rotates in the opposite direction of
     // the steering motor in the MAXSwerve Module.
-    m_leftMotor.setInverted(ElevatorRotateConstants.kElevatorRotateLeftEncoderInverted);
-    m_rightMotor.setInverted(ElevatorRotateConstants.kElevatorRotateLeftEncoderInverted);
+    m_leftMotor.setInverted(ElevatorRotateConstants.kElevatorRotateLeftMotorInverted);
+    m_rightMotor.setInverted(ElevatorRotateConstants.kElevatorRotateLeftMotorInverted);
   
     // Save the SPARK MAX configurations. If a SPARK MAX browns out during
     // operation, it will maintain the above configurations.
@@ -37,14 +37,14 @@ public class ElevatorRotateSubsystem extends SubsystemBase {
 
   /** Set the elevator rotate motor to move in the backward direction. */
   public void rotateBackward() {
-    m_leftMotor.set(-1);
-    m_rightMotor.set(-1);
+    m_leftMotor.set(-ElevatorRotateConstants.kLeftRotateMotorSpeed);
+    m_rightMotor.set(-ElevatorRotateConstants.kRightRotateMotorSpeed);
   }
 
   /** Set the elevator rotate motor to move in the forward direction. */
   public void rotateForward() {
-    m_leftMotor.set(1);
-    m_rightMotor.set(1);
+    m_leftMotor.set(ElevatorRotateConstants.kLeftRotateMotorSpeed);
+    m_rightMotor.set(ElevatorRotateConstants.kRightRotateMotorSpeed);
   }
 
   /** Stops the elevator rotate motor from moving. */
